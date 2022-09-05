@@ -1,0 +1,22 @@
+version: '3'
+
+services:
+
+  php-apache:
+    build:
+      ./php # используем докерфайл, так как должны подкачать mysqli
+    ports:
+      - 80:80 # первый порт - наша машина, второй порт - виртуальная
+    volumes:
+      - ./src:/var/www/html # линукуем папку с index.php и style.css с папкой в виртуальной машине
+    depends_on:
+      - mysql # запустится после базы
+
+  mysql:
+    image: mysql # образ mysql 
+    container_name: DB # ставим имя контейнеру, чтобы в mysqli обратиться к нему
+    volumes: 
+      - "./sql/init.sql:/docker-entrypoint-initdb.d/1.sql" # линкуем файл инициализации бд к файлу запуска
+    environment:
+      MYSQL_ROOT_PASSWORD: password # пароль нужно поставить, иначе заругает mysql
+    
