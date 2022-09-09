@@ -3,20 +3,18 @@ version: '3'
 services:
 
   php-apache:
-    build:
-      ./php # используем докерфайл, так как должны подкачать mysqli
+    build: ./php # указание расположения файла DOCKERFILE для docker-compose
     ports:
-      - 80:80 # первый порт - наша машина, второй порт - виртуальная
+      - 80:80 # пробрасывание портов: первый порт - наша машина, второй порт - виртуальная
     volumes:
-      - ./src:/var/www/html # линукуем папку с index.php и style.css с папкой в виртуальной машине
-    depends_on:
-      - mysql # запустится после базы
+      - ./src:/var/www/html # соединяем папку с клиентской частью с папкой виртуальной машины
+
 
   mysql:
-    image: mysql # образ mysql 
+    image: mysql:latest # образ mysql последней версии
     container_name: DB # ставим имя контейнеру, чтобы в mysqli обратиться к нему
     volumes: 
-      - "./sql/init.sql:/docker-entrypoint-initdb.d/1.sql" # линкуем файл инициализации бд к файлу запуска
+      - "./sql/init.sql:/docker-entrypoint-initdb.d/first.sql" # соединяем файл инициализации с файлом запуска бд
     environment:
-      MYSQL_ROOT_PASSWORD: password # пароль нужно поставить, иначе заругает mysql
+      MYSQL_ROOT_PASSWORD: password # без пароля не получалось
     
