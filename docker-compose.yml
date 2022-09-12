@@ -17,4 +17,29 @@ services:
       - "./sql/init.sql:/docker-entrypoint-initdb.d/first.sql" # соединяем файл инициализации с файлом запуска бд
     environment:
       MYSQL_ROOT_PASSWORD: password # без пароля не получалось
-    
+
+
+  Drawer:
+    container_name: Drawer
+    image: php:7.2-apache
+    ports:
+      - 1111:80
+    volumes:
+      - ./Drawer:/var/www/html
+
+
+  Sorter:
+    container_name: Sorter
+    image: php:7.2-apache
+    ports:
+      - 2222:80
+    volumes:
+      - ./Sorter:/var/www/html
+
+  LinuxCommand:
+    container_name: LinuxCommand
+    image: php:7.2-apache
+    ports:
+      - 3333:80
+    volumes:
+      - ./LinuxCommand:/var/www/html
