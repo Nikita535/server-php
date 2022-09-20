@@ -31,7 +31,7 @@ if(isset($_GET['num']))
 
 
     // выводим эти данные
-    echo '<div>'
+    echo '<div style="text-align:  center">'
         . 'Форма фигуры: '
         . $Shape, '<br>Цвет фигуры: '
         . $Color, '<br>Координата по x: '
@@ -69,7 +69,7 @@ if(isset($_GET['num']))
      * </svg>
      */
 
-    $svg_code = '<svg width = "' . $cx . '" height= "' . $cy . '">';
+    $svg_code = '<div style="text-align:  center"><svg width = "' . $cx . '" height= "' . $cy . '">';
     switch($Shape){
         //Круг
         case 0:
@@ -91,7 +91,7 @@ if(isset($_GET['num']))
             break;
     }
 
-    $svg_code .= '</svg>';
+    $svg_code .= '</svg></div>';
     echo $svg_code;
 }
 ?>
